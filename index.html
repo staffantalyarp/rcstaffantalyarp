@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RC Staff — Recrutement</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #08090d;
+    color: #fff;
+    min-height: 100vh;
+}
+
+header {
+    height: 75px;
+    background: #0d0f15;
+    border-bottom: 1px solid #1d2029;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #5865f2;
+}
+
+nav a {
+    color: #a9adba;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    transition: .2s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.hero {
+    max-width: 1100px;
+    margin: auto;
+    padding: 100px 25px 60px;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(88,101,242,.12);
+    border: 1px solid rgba(88,101,242,.3);
+    color: #7180ff;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #5865f2;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    color: #9297a5;
+    line-height: 1.7;
+}
+
+.btn {
+    display: inline-block;
+    border: none;
+    background: #5865f2;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+    margin-top: 30px;
+}
+
+.btn:hover {
+    background: #4752c4;
+    transform: translateY(-2px);
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 25px 80px;
+}
+
+.card {
+    background: #0d0f15;
+    border: 1px solid #1d2029;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    margin-bottom: 8px;
+}
+
+.card-description {
+    color: #858a99;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    display: block;
+    color: #d7d9df;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+input, select, textarea {
+    width: 100%;
+    background: #08090d;
+    border: 1px solid #252935;
+    color: white;
+    padding: 13px 14px;
+    border-radius: 8px;
+    outline: none;
+    transition: .2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #5865f2;
+    box-shadow: 0 0 0 3px rgba(88,101,242,.1);
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #9a9eaa;
+    font-size: 13px;
+}
+
+.checkbox input {
+    width: auto;
+    margin-top: 2px;
+}
+
+.submit {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success .icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: rgba(35,165,90,.15);
+    color: #23a55a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.admin {
+    display: none;
+}
+
+.application {
+    border: 1px solid #242833;
+    background: #090b10;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+.application strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.application small {
+    color: #858a99;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 11px;
+    background: #454b5a;
+}
+
+.actions button {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    margin: 10px 5px 0 0;
+}
+
+.accept {
+    background: #248046;
+}
+
+.refuse {
+    background: #da373c;
+}
+
+footer {
+    border-top: 1px solid #1d2029;
+    padding: 25px;
+    text-align: center;
+    color: #686d7b;
+    font-size: 12px;
+}
+
+@media(max-width: 700px) {
+    header {
+        padding: 0 20px;
+    }
+
+    nav a {
+        margin-left: 10px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .hero {
+        padding-top: 70px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">RC <span>STAFF</span></div>
+
+    <nav>
+        <a href="#accueil">Accueil</a>
+        <a href="#candidature">Candidature</a>
+        <a href="#admin" onclick="openAdmin()">Staff</a>
+    </nav>
+</header>
+
+<section class="hero" id="accueil">
+    <div class="badge">RECRUTEMENT OUVERT</div>
+
+    <h1>Rejoins le <span>Staff</span></h1>
+
+    <p>
+        Tu souhaites rejoindre notre équipe et contribuer au développement
+        du serveur ? Remplis ta candidature et montre-nous pourquoi tu serais
+        un excellent membre du staff.
+    </p>
+
+    <a href="#candidature" class="btn">Déposer ma candidature</a>
+</section>
+
+<div class="container" id="candidature">
+
+    <div class="card" id="formCard">
+        <h2>📋 Candidature Staff</h2>
+
+        <p class="card-description">
+            Merci de répondre sérieusement à toutes les questions.
+            Les candidatures troll ou incomplètes pourront être refusées.
+        </p>
+
+        <form id="applicationForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Pseudo Discord *</label>
+                    <input id="discord" required placeholder="ex : pseudo">
+                </div>
+
+                <div class="field">
+                    <label>Âge *</label>
+                    <input id="age" type="number" min="13" required placeholder="18">
+                </div>
+
+                <div class="field">
+                    <label>Temps de jeu par semaine *</label>
+                    <input id="hours" required placeholder="ex : 20 heures">
+                </div>
+
+                <div class="field">
+                    <label>Expérience Staff *</label>
+                    <select id="experience" required>
+                        <option value="">Sélectionner</option>
+                        <option>Débutant</option>
+                        <option>Quelques expériences</option>
+                        <option>Bonne expérience</option>
+                        <option>Expérience importante</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label>Pourquoi veux-tu rejoindre le Staff ? *</label>
+                    <textarea id="motivation" required></textarea>
+                </div>
+
+                <div class="field full">
+                    <label>Quelles sont tes qualités ? *</label>
+                    <textarea id="qualities" required></textarea>
+                </div>
+
+                <div class="field full">
+                    <label>Comment réagirais-tu face à un joueur qui enfreint les règles ? *</label>
+                    <textarea id="situation" required></textarea>
+                </div>
+
+                <div class="field full">
+                    <label>Que représente le RP pour toi ? *</label>
+                    <textarea id="rp" required></textarea>
+                </div>
+
+                <div class="field full">
+                    <label>
+                        <span class="checkbox">
+                            <input type="checkbox" required>
+                            J'atteste que les informations fournies sont sincères
+                            et que je respecterai le règlement du serveur.
+                        </span>
+                    </label>
+                </div>
+
+            </div>
+
+            <button class="btn submit" type="submit">
+                Envoyer ma candidature
+            </button>
+
+        </form>
+    </div>
+
+    <div class="card success" id="success">
+        <div class="icon">✓</div>
+        <h2>Candidature envoyée !</h2>
+        <p class="card-description">
+            Merci pour ta candidature. Elle sera étudiée par notre équipe Staff.
+        </p>
+
+        <button class="btn" onclick="location.reload()">
+            Retour à l'accueil
+        </button>
+    </div>
+
+    <div class="card admin" id="admin">
+        <h2>🔐 Panel Staff</h2>
+
+        <p class="card-description">
+            Gestion des candidatures reçues sur cet appareil.
+        </p>
+
+        <div id="applications"></div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 RC Staff — Tous droits réservés.
+</footer>
+
+<script>
+
+let applications =
+    JSON.parse(localStorage.getItem("rc_staff_applications")) || [];
+
+const form = document.getElementById("applicationForm");
+
+form.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const application = {
+        id: Date.now(),
+        discord: document.getElementById("discord").value,
+        age: document.getElementById("age").value,
+        hours: document.getElementById("hours").value,
+        experience: document.getElementById("experience").value,
+        motivation: document.getElementById("motivation").value,
+        qualities: document.getElementById("qualities").value,
+        situation: document.getElementById("situation").value,
+        rp: document.getElementById("rp").value,
+        status: "En attente",
+        date: new Date().toLocaleString("fr-FR")
+    };
+
+    applications.push(application);
+
+    localStorage.setItem(
+        "rc_staff_applications",
+        JSON.stringify(applications)
+    );
+
+    document.getElementById("formCard").style.display = "none";
+    document.getElementById("success").style.display = "block";
+
+});
+
+function openAdmin() {
+
+    const password = prompt("Mot de passe Staff :");
+
+    if(password !== "admin123") {
+        alert("Mot de passe incorrect.");
+        return;
+    }
+
+    document.getElementById("admin").style.display = "block";
+
+    renderApplications();
+
+    document.getElementById("admin").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function renderApplications() {
+
+    const container = document.getElementById("applications");
+
+    if(applications.length === 0) {
+        container.innerHTML =
+            "<p style='color:#858a99'>Aucune candidature pour le moment.</p>";
+        return;
+    }
+
+    container.innerHTML = "";
+
+    applications.forEach((app, index) => {
+
+        const div = document.createElement("div");
+
+        div.className = "application";
+
+        div.innerHTML = `
+            <strong>${escapeHTML(app.discord)}</strong>
+            <small>
+                Âge : ${escapeHTML(app.age)} |
+                ${escapeHTML(app.experience)} |
+                ${escapeHTML(app.hours)}
+            </small>
+
+            <p style="margin-top:15px;color:#aaa">
+                <b>Motivation :</b><br>
+                ${escapeHTML(app.motivation)}
+            </p>
+
+            <p style="margin-top:12px;color:#aaa">
+                <b>Qualités :</b><br>
+                ${escapeHTML(app.qualities)}
+            </p>
+
+            <p style="margin-top:12px;color:#aaa">
+                <b>Mise en situation :</b><br>
+                ${escapeHTML(app.situation)}
+            </p>
+
+            <p style="margin-top:12px;color:#aaa">
+                <b>Vision du RP :</b><br>
+                ${escapeHTML(app.rp)}
+            </p>
+
+            <small>Envoyée le ${app.date}</small>
+
+            <br>
+
+            <span class="status">${app.status}</span>
+
+            <div class="actions">
+                <button class="accept"
+                    onclick="changeStatus(${index}, 'Acceptée')">
+                    ✓ Accepter
+                </button>
+
+                <button class="refuse"
+                    onclick="changeStatus(${index}, 'Refusée')">
+                    ✕ Refuser
+                </button>
+
+                <button class="refuse"
+                    onclick="deleteApplication(${index})">
+                    Supprimer
+                </button>
+            </div>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+function changeStatus(index, status) {
+
+    applications[index].status = status;
+
+    localStorage.setItem(
+        "rc_staff_applications",
+        JSON.stringify(applications)
+    );
+
+    renderApplications();
+}
+
+function deleteApplication(index) {
+
+    if(!confirm("Supprimer cette candidature ?")) return;
+
+    applications.splice(index, 1);
+
+    localStorage.setItem(
+        "rc_staff_applications",
+        JSON.stringify(applications)
+    );
+
+    renderApplications();
+}
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+</script>
+
+</body>
+</html>
